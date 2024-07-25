@@ -28,3 +28,14 @@ Download the [Tobii Pro Eye Tracker Manager](https://connect.tobii.com/s/etm-dow
 
 (Note: there is currently an unresolved issue with successfully installing this software to Linux devices, ongoing efforts are currently being done to resolve this problem).
 
+## Usage
+Three are two files to run:
+
+main_GUI.py: runs the eye tracking experiment, and then saves the data to the JSON within the directory.
+
+main_data_analysis.py: using the analyze_data() function, creates visual heatmap of a specific image/question pair, and returns all the OCRs within a specified distance of each visual fixation point.
+
+In order to maximize value from this software and analysis, it is important to note the several hyperparameters within the code and their importance.
+
+### Hyperparameters
+
