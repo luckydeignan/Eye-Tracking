@@ -419,12 +419,8 @@ def base64_to_image(base64_str):
     # Open the image using Pillow
     return Image.open(buffered)
 
-if __name__ == "__main__": 
-    with open("C:/Users/ljdde/Downloads/CVC/test1/experiment_data.json", 'r') as json_file:
-        experiment_data = json.load(json_file)
-    
-    desired_img = experiment_data["2024-07-25 11:41:25"]['ffbx0227_7']
-    
-    print(analyze_data(desired_img['gaze_data'],base64_to_image(desired_img['edited_image']),desired_img['widget_width'],desired_img['widget_height'],desired_img['left_x'],desired_img['top_y'],desired_img['screensize'],desired_img['image_number']))
-
+# if __name__ == "__main__": 
+#     Enter your code here to use analyze_data() to analyze the tracking data of a specific image/question pair f
+#     being stored in the JSON. 
+#     
 
