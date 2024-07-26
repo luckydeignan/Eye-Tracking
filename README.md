@@ -45,3 +45,23 @@ In order to maximize value from this software and analysis, it is important to n
 - **main_data_analysis.py**
   - *rad*: variable under *nearest_ocr* function. Determines radius around fixation point in which OCR's are fetched
   - *min_cluster_size*: variable under *ocr_cluster* function. Determines minimum number of points to create a cluster from       eye-tracking data. More info in file comments.
+
+ ## Data Storage
+ For now, the data is being stored in the corresponding **experiment_data.json** JSON file. The format of the data assumes the following structure:
+ {date/time of trial:
+       image_id_1 (string that is name of image in folder, excluding the .PNG): {
+               "gaze data": *eye_tracking_data*,
+               "edited_image": *base_64_str_representation_image* (of resized version that was used during experiment),
+               "widget_width": *width_of_widget_containing_image*,
+               "left_x": *#_of_pixels_left_of_widget*,
+               "top_y": *#_of_pixes_above_widget*,
+               "screensize": *display_screensize*,
+               "image_number": *index_of_img_in_imdb*
+               },
+        image_id_2: {
+                ...
+                }
+        ...
+        }
+
+  All of this data being stored is necessary for complete data analysis and visualization.
