@@ -48,7 +48,8 @@ In order to maximize value from this software and analysis, it is important to n
 
  ## Data Storage
  For now, the data is being stored in the corresponding **experiment_data.json** JSON file. The format of the data assumes the following structure:
- {date/time of trial:
+ ```
+{date/time of trial:
        image_id_1 (string that is name of image in folder, excluding the .PNG): {
                "gaze data": *eye_tracking_data*,
                "edited_image": *base_64_str_representation_image* (of resized version that was used during experiment),
@@ -63,5 +64,5 @@ In order to maximize value from this software and analysis, it is important to n
                 }
         ...
         }
-
+  ```
   All of this data being stored is necessary for complete data analysis and visualization.
