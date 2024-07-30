@@ -1,6 +1,6 @@
 # Recommendations for Future Modifications
 
-Outside of the two "Notes" mentioned in analyze_single_iamge() and analyze_single_trial() and the bottom of TraceOverview.md (read that document first, to have an understand of the program before coming here), here are further recommendations for things to consider in order to improve this framework:
+Outside of the two "Notes" mentioned in analyze_single_image() and analyze_single_trial() and the bottom of TraceOverview.md (read that document first, to have an understand of the program before coming here), here are further recommendations for things to consider in order to improve this framework:
 
 - OCR designation radius:
     - As of now, the nearest_ocr() uses a radius of a constant number of pixels to capture the OCRs around a given fixation point. The default parameter of 72 px was calculated with calculations along with some rough estimations and educated guesses.
