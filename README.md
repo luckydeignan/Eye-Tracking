@@ -33,7 +33,7 @@ Three are two files to run:
 
 **main_GUI.py**: runs the eye tracking experiment, and then saves the data to the JSON within the directory.
 
-**main_data_analysis.py**: using the analyze_data() function, creates visual heatmap of a specific image/question pair, and returns all the OCRs within a specified distance of each visual fixation point.
+**main_data_analysis.py**: using the analyze_data() function, creates visual heatmap of a specific image/question pair, and returns all the OCRs within a specified distance of each visual fixation point. There is currently a commented out section of code at the bottom of the file that provides an example of the data analysis.
 
 In order to maximize value from this software and analysis, it is important to note the several hyperparameters within the code and their importance.
 
@@ -67,3 +67,5 @@ Each of these hyperparameters are listed at the top of their respective files, a
         }
   ```
   All of this data being stored is necessary for complete data analysis and visualization.
+
+  As of now, there is a single trial being stored in the JSON, to use as an example for analyzing the data. This can be done by uncommenting the bottom lines of **main_data_analysis.py**
