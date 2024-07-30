@@ -1,6 +1,6 @@
 # Recommendations for Future Modifications
 
-Outside of the two "Notes" mentioned in analyze_single_iamge() and analyze_single_trial() and the bottom of TraceOverview.md, here are further recommendations for things to consider in order to improve this framework:
+Outside of the two "Notes" mentioned in analyze_single_iamge() and analyze_single_trial() and the bottom of TraceOverview.md (read that document first, to have an understand of the program before coming here), here are further recommendations for things to consider in order to improve this framework:
 
 - OCR designation radius:
     - As of now, the nearest_ocr() uses a radius of a constant number of pixels to capture the OCRs around a given fixation point. The default parameter of 72 px was calculated with calculations along with some rough estimations and educated guesses.
@@ -25,3 +25,11 @@ Outside of the two "Notes" mentioned in analyze_single_iamge() and analyze_singl
 - More robust testing for accuracy:
     - Though I am confident in the accuracy of the heatmap and OCR designations, and some basic testing for this was performed, the program can always benefit from continuous and more rigorous testing to ensure its accuracy, especially as development continues.
     - Particularly for edge cases that may be overlooked in the code (what if user looks at edge of image/screen, away from screen, etc).
+
+- Miscellaneous Small Fixes (small fixes I just didn't have time to get to)
+    - Displaying the question/answer alongside the heatmap
+        - Would be helpful to know so that we can see if the logic behind the data makes sense
+        - When we call analyze_data(), we already have the index of imdb_data associated with the image (image_number), so this should be an easy task
+    - Fixing the last page transition
+        - As of now, when the experiment is done, the GUI displays the intermediary page one more time before going to the final page
+        - Would be a more coherent and smooth transition to go directly to the end page once experiment is done
