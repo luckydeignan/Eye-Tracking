@@ -11,8 +11,21 @@ import json
 import base64
 from io import BytesIO
 from datetime import datetime
+import random
 
 
+''' INITIALIZED HYPERPARAMETERS: edit variables below to your preferences '''
+
+folder_path = "path/to/your/desired/image_samples" #folder path that contains all set of images to be shown
+rand_image = True #indicates whether image will be randomly fetched from folder (if False, images are fetched in order)
+total_num_images = 10 #number of images to be shown in experiment
+
+#OCR DATA -- contains data on each of the images of DocVQA dataset Task 1
+ocr_data = np.load("/path/to/your/imdb/dataset.npy",allow_pickle=True)
+
+#reduced proportion: the maximum proportion of display height/width that image will take up in experiment
+#only hyperparameter recommended to not change... all others should be at least considered by the experimenter
+reduced_prop=.8
 
 '''INITIALIZED GLOBAL VARIABLES: each used in one or more functions below'''
 
@@ -25,17 +38,15 @@ left_x, top_y = 0,0
 image_number = None
 image_id = None
 resized_image = None
-folder_path = "C:/Users/ljdde/Downloads/CVC/image_samples"
 file_names=[filename for filename in os.listdir(folder_path)]
 
-#BOOLEANS TO INDICATE PROGRESS ALONG DIFFERENT POINTS OF EXPERIMENT (collecting_data)
+#BOOLEANS TO INDICATE PROGRESS ALONG DIFFERENT POINTS OF EXPERIMENT 
 collecting_data=False
 done_collecting=False
 experiment_done=False
 first_time=True
+num_images_sofar=0
 
-#OCR DATA -- contains data on each of the images of DocVQA dataset Task 1
-ocr_data = np.load("C:/Users/ljdde/Downloads/CVC/spdocvqa_imdb/imdb_train.npy",allow_pickle=True)
 
 #DateTime to use as marker to organize data collection
 now = datetime.now()
@@ -53,7 +64,6 @@ with open(json_path, 'r') as json_file:
 
 
 
-
 def save_data():
     experiment_data[formatted_now]=current_trial_data[formatted_now]
     with open(json_path,'w') as json_file:
@@ -64,10 +74,10 @@ def get_file_question(id):
     Given an Image ID, returns the question associated with the image
 
     Parameters:
-    id (str): Image ID. Found within the image_next() function
+        id (str): Image ID. Found within the image_next() function
 
     Returns:
-    str: string that is the question corresponding to given image (in the context of DocVQA dataset Task 1)
+        str: string that is the question corresponding to given image (in the context of DocVQA dataset Task 1)
     '''
     
     for file in ocr_data[1:]:
@@ -81,10 +91,10 @@ def get_file_number(id):
     Given an Image ID, returns associated index of that image in the DocVQA dataset
     
     Parameters:
-    id (str): Image ID. Found within the image_next() function
+        id (str): Image ID. Found within the image_next() function
 
     Returns:
-    int: integer that is used to index into DocVQA dataset to access the given image's data information
+        int: integer that is used to index into DocVQA dataset to access the given image's data information
     '''
  
     for index, file in enumerate(ocr_data[1:]):
@@ -92,19 +102,19 @@ def get_file_number(id):
             return index+1
         
 
-def fit(filename,reduced_prop=.8):
+def fit(filename):
     '''
     Returns a new image that is at most reduced_prop size of the screen in both height and width
     
     Parameters:
-    filename (str): the filename for the image
-    reduced_prop (float): a float between 0 and 1 that indicates that maximal proportion of the screen 
-                            you want the image to take up in both height & width. Default value is .8
+        filename (str): the filename for the image
+        reduced_prop (float): a float between 0 and 1 that indicates that maximal proportion of the screen 
+                                you want the image to take up in both height & width. Default value is .8
 
     Returns:
-    Image: a Pillow Image object that is resized to fit the screen
+        Image: a Pillow Image object that is resized to fit the screen
     '''
-
+    
     image = Image.open(filename)
     #this block is resizing the image until it is smaller than constraints defined by reduced_prop
     while image.size[0]>reduced_prop*screensize[0] or image.size[1]>reduced_prop*screensize[1]:
@@ -149,22 +159,25 @@ def nextpage():
 
     #call function that handles fetching of next image/question pair
     image_next()
+
     
 
 def image_next():
     '''
     Handles the actual fetching of the next image/question pair from the given folder.
 
-    
-        NOTE: need to still implement fetch random image from sample_images folder
     '''
-    global resized_image, image_number, image_id
+    global resized_image, image_number, image_id, rand_image, num_images_sofar
     global widget_height,widget_width,left_x,top_y, experiment_done
 
 
-    if len(file_names)!=0:  #NOTE: need to change this so that its dependent on parameter for how many images to be shown 
-
-        new_image_name = file_names.pop(0)
+    if num_images_sofar < total_num_images and file_names: # ensure we still have more images to show
+        if rand_image:
+            possible_indeces = len(file_names)-1
+            random_index = random.randint(0,possible_indeces)
+            new_image_name = file_names.pop(random_index)
+        else:
+            new_image_name = file_names.pop(0)
         new_image_path = os.path.join(folder_path,new_image_name)
 
         
@@ -187,6 +200,8 @@ def image_next():
         image_number = get_file_number(image_id)
         doc_question.set(ocr_data[image_number]['question'])
 
+        #increment # of images shown by 1
+        num_images_sofar+=1
 
         #get widget width and length
         root.update()
@@ -214,7 +229,7 @@ def threading():
     # initialize new thread that will run eye tracker during a given question/image answer process
     if not experiment_done: 
         t1=Thread(target=run_eye_tracker) 
-        t1.start() 
+        t1.start()
     else: #do nothing if experiment over
         pass
    
@@ -244,11 +259,11 @@ def run_eye_tracker():
         Function that adds gaze data from eye tracker to global dictionary
 
         Parameters: 
-        gaze_data (dict): a data point from a single gaze point
+            gaze_data (dict): a data point from a single gaze point
 
         Returns:
-        None: but modifies global dictionary to include current gaze data point
-                in the form of {timestamp: (left_eye_coordinate, right_eye_coordinate)}
+            None: but modifies global dictionary to include current gaze data point
+                    in the form of {timestamp: (left_eye_coordinate, right_eye_coordinate)}
         '''
         nonlocal current_question_eye_data
         current_question_eye_data[gaze_data['system_time_stamp']]=(gaze_data['left_gaze_point_on_display_area'],
