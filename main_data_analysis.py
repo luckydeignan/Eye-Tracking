@@ -411,8 +411,8 @@ def analyze_data(gaze_data,edited_image,widget_width,widget_height,left_x,top_y,
     ax[1].set_zlabel('y-location (inverted)')
 
     ### if you want to be able to see OCR designations alongside data visualization
-    # for color,ocrs in ocr_designation.items(): 
-    #     print(f"{color} cluster was near the following OCRs: {ocrs}")
+    for color,ocrs in ocr_designation.items(): 
+        print(f"{color} cluster was near the following OCRs: {ocrs}")
 
     plt.show()
 
