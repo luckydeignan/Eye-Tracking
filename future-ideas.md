@@ -30,6 +30,9 @@ Outside of the two "Notes" mentioned in analyze_single_iamge() and analyze_singl
     - Displaying the question/answer alongside the heatmap
         - Would be helpful to know so that we can see if the logic behind the data makes sense
         - When we call analyze_data(), we already have the index of imdb_data associated with the image (image_number), so this should be an easy task
+    - Distinguishing off-image gazes and non-OCR gazes
+        - As of now, when printing the OCR designations, I believe it prints None for off-image gazes and [] for non-OCR capturing gazes.
+        - This needs confirmation though. If so, make it more clear that the subject is gazing away from the image at that moment. 
     - Fixing the last page transition
         - As of now, when the experiment is done, the GUI displays the intermediary page one more time before going to the final page
         - Would be a more coherent and smooth transition to go directly to the end page once experiment is done
