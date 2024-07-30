@@ -38,10 +38,10 @@ Three are two files to run:
 In order to maximize value from this software and analysis, it is important to note the several hyperparameters within the code and their importance.
 
 ### Hyperparameters
-Each of these hyperparameters are listed at the top of their respective files, and can be modified per the user's preferences.
+Each of these hyperparameters are listed at the top of their respective files, and can be modified per the user's preferences. Those marked with an asterisk '*' must be modified in order for the program to run successfully.
 - **main_GUI.py**
-  - *folder_path*: the file path on your system that contains the images that you'd like to display for your experiment
-  - *ocr_data*: in the context of SQVA, loads the OCR imbd data based on the path given from your device
+  - *folder_path**: the file path on your system that contains the images that you'd like to display for your experiment
+  - *ocr_data**: in the context of SQVA, loads the OCR imbd data based on the path given from your device
   - *reduced_prop*: variable under *fit()* function. Determines the maximum proportion of width/height of screen that image       will take up when being displayed on screen.
 - **main_data_analysis.py**
   - *rad*: variable under *nearest_ocr* function. Determines radius around fixation point in which OCR's are fetched
