@@ -17,10 +17,10 @@ Use the package manager [pip](https://pip.pypa.io/en/stable/) to install necessa
 pip install tobii_research
 pip install matplotlib
 pip install hdbscan
-pip install sklearn
+pip install scikit-learn
 pip install scipy
-pip install pillow
-pip install tkinter
+pip install Pillow
+pip install tk
 pip install numpy
 ```
 
