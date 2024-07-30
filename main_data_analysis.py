@@ -504,4 +504,4 @@ if __name__ == "__main__":
     ### ENTER YOUR CODE BELOW TO ANALYZE DATA
     
     ### EXAMPLE: run the following line to analyze data from a single trial run (data initialized in JSON)
-    ### analyze_single_trial("2024-07-29 13:44:14")
+    ### analyze_single_trial("2024-07-30 14:26:06")
