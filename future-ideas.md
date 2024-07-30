@@ -1,6 +1,6 @@
 # Recommendations for Future Modifications
 
-Outside of the two notes mentioned in the two functions directly above, here are further recommendations for things to consider in order to improve this framework:
+Outside of the two "Notes" mentioned in analyze_single_iamge() and analyze_single_trial() and the bottom of TraceOverview.md, here are further recommendations for things to consider in order to improve this framework:
 
 - OCR designation radius:
     - As of now, the nearest_ocr() uses a radius of a constant number of pixels to capture the OCRs around a given fixation point. The default parameter of 72 px was calculated with calculations along with some rough estimations and educated guesses.
@@ -23,5 +23,5 @@ Outside of the two notes mentioned in the two functions directly above, here are
         - Including components related to experiment itself (example: having user read different sized fonts to know how close/far to screen they need to sit for the experiment and/or which images have too small of font, etc)
           
 - More robust testing for accuracy:
-    - Though I am confident in the accuracy of the heatmap and OCR designations, and some basic testing for this was performed, the program could benefit from additional more rigorous testing to ensure its accuracy
+    - Though I am confident in the accuracy of the heatmap and OCR designations, and some basic testing for this was performed, the program can always benefit from continuous and more rigorous testing to ensure its accuracy, especially as development continues.
     - Particularly for edge cases that may be overlooked in the code (what if user looks at edge of image/screen, away from screen, etc).
